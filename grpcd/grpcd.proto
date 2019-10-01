@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package grpcd;
+
+service Grpcd {
+    rpc Auth(AuthRequest) returns (AuthReply) {};
+}
+
+message AuthRequest{
+    string Login = 1;
+    string Password = 2;
+}
+
+message AuthReply{
+    bool Logined = 1;
+    string Login = 2;
+    string RealName = 3;
+    string Tags = 4;
+}
