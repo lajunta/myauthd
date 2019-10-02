@@ -23,6 +23,7 @@ type Config struct {
 	PassFieldName     string
 	RealNameFieldName string
 	RolesFieldName    string
+	CryptMethod       string
 }
 
 var (

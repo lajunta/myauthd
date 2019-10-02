@@ -1,6 +1,5 @@
 data.db
 *.exe
-myauthd
 dist/myauthd/usr/local/bin/myauthd
 myauthd_linux
 myauthd.deb

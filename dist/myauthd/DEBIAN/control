@@ -1,0 +1,5 @@
+Package: myauthd 
+Version: 0.1
+Maintainer: zxy
+Architecture: all
+Description: user auth api using grpc and protocol

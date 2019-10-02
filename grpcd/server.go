@@ -20,8 +20,8 @@ func (s *Server) Auth(ctx context.Context, in *AuthRequest) (*AuthReply, error) 
 
 	u := AuthReply{}
 	login := utils.Filter(in.Login)
-	//passd := utils.Crypt(in.Password)
 	passd := utils.Filter(in.Password)
+	passd = utils.Crypt(passd)
 
 	qstr := fmt.Sprintf("select %s,%s from %s where %s='%s' and %s='%s'", c.RealNameFieldName, c.RolesFieldName, c.TableName, c.LoginFieldName, login, c.PassFieldName, passd)
 

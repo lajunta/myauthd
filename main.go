@@ -16,11 +16,13 @@ import (
 )
 
 var (
-	host    string
-	port    string
-	gc      bool
-	daemon  bool
-	address string
+	host       string
+	port       string
+	gc         bool
+	daemon     bool
+	address    string
+	testUser   string
+	testPasswd string
 )
 
 func init() {
@@ -29,8 +31,10 @@ func init() {
 }
 
 func flagParse() {
-	flag.StringVar(&port, "port", "5005", "server running port")
+	flag.StringVar(&port, "port", "5050", "server running port")
 	flag.StringVar(&host, "host", "127.0.0.1", "server host address")
+	flag.StringVar(&testUser, "t", "hello", "a test login name")
+	flag.StringVar(&testPasswd, "p", "hello", "a test password")
 	flag.BoolVar(&daemon, "d", false, "server daemon mode")
 	flag.BoolVar(&gc, "c", false, "grpc client mode(for test only)")
 

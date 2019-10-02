@@ -1,13 +1,37 @@
-# Mysql Auth
+# MyAuthd 
 
-This program is used to authenticate user from a remote grpc request in local mysql server .
+[中文](docs/readme.cn.md)
 
-## make a config file
+This program is used to authenticate user in local mysql server via remote grpc request . It uses grpc and protobuf to format and transport data
 
-~/.mysql_auth/config.toml
+## Installation
+
+This utility build binary and make a deb file for convience
+
+### 1. Install protoc 
+
+Go to https://github.com/protocolbuffers/protobuf to download protoc
+
+### 2. Install go protoc package
 
 ```
-DbAddress =  "127.0.0.1:4000"
+go get -u github.com/golang/protobuf/protoc-gen-go
+```
+
+### 3. Using build.sh to build 
+
+```
+./build.sh
+```
+
+## Usage
+
+### 1. Make a config file within the running user home dir
+
+~/.myauthd/config.toml
+
+```toml
+DbAddress =  "127.0.0.1:3306"
 DbName  = "netschool" 
 TableName  = "user" 
 DbUser  = "test"
@@ -16,37 +40,28 @@ LoginFieldName = "login"
 PassFieldName  = "password"
 RealNameFieldName = "realname"
 RolesFieldName  = "roles"
+CryptMethod = "sha256"
 ```
 
-## Sql Usage
+### 2. Modify systemd file and Start it
 
-### create table
-
-```
-create table user(id int not null primary key auto_increment,
-  login varchar(20), password(30),realname varchar(10),roles varchar(255));
-```
-
-### add more columns
+Open File `/etc/systemd/system/myauthd.conf`
+Modify User and Group 
 
 ```
-ALTER TABLE table_name ADD column_name datatype;
+sudo vi /etc/systemd/system/myauthd
+sudo systemctl enable myauthd
+sudo systemctl start myauthd
 ```
 
-### create a user
+### 3. Test it
+
+- Insert database some record
+- Grant select right to some user (like test)
+- Test it
 
 ```
-create user "abc" identified by "abc";
+./myauthd -c -t test -p test
 ```
 
-### grant a user 
-
-```
-grant select on db.table to 'test';
-```
-
-### update value
-
-```
-UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-```
+It will println user realname and roles
