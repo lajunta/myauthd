@@ -22,7 +22,6 @@ func (s *Server) Auth(ctx context.Context, in *AuthRequest) (*AuthReply, error) 
 	login := utils.Filter(in.Login)
 	passd := utils.Filter(in.Password)
 	passd = utils.Crypt(passd)
-
 	qstr := fmt.Sprintf("select %s,%s from %s where %s='%s' and %s='%s'", c.RealNameFieldName, c.RolesFieldName, c.TableName, c.LoginFieldName, login, c.PassFieldName, passd)
 
 	row := utils.DB.QueryRow(qstr)
@@ -33,5 +32,6 @@ func (s *Server) Auth(ctx context.Context, in *AuthRequest) (*AuthReply, error) 
 		return &u, errors.New("Auth Failed")
 	}
 	u.Logined = true
+	u.Login = login
 	return &u, nil
 }

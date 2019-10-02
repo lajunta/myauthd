@@ -54,7 +54,7 @@ func readConfig() {
 		log.Fatalln("Can't Open User Home Dir")
 		os.Exit(1)
 	}
-	configFilePath := path.Join(home, ".mysql_auth", configFileName)
+	configFilePath := path.Join(home, ".myauthd", configFileName)
 	_, err = toml.DecodeFile(configFilePath, &CFG)
 	if err != nil {
 		log.Fatalln("Can't Open ConfigFile of ConfigFile Wrong!!")
