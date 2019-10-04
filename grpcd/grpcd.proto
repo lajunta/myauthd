@@ -2,8 +2,15 @@ syntax = "proto3";
 
 package grpcd;
 
+import "google/api/annotations.proto";
+
 service Grpcd {
-    rpc Auth(AuthRequest) returns (AuthReply) {};
+    rpc Auth(AuthRequest) returns (AuthReply) {
+        option (google.api.http) = {
+        post: "/v1/auth"
+        body: "*"
+        };
+    }
 }
 
 message AuthRequest{

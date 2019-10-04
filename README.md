@@ -15,6 +15,8 @@ Go to https://github.com/protocolbuffers/protobuf to download protoc
 ### 2. Install go protoc package
 
 ```
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 go get -u github.com/golang/protobuf/protoc-gen-go
 ```
 
@@ -58,10 +60,17 @@ sudo systemctl start myauthd
 
 - Insert database some record
 - Grant select right to some user (like test)
-- Test it
+- Test it 
+- If using tsl , add -h servername 
 
 ```
-./myauthd -c -t test -p test
+dist/client -h servername -u test -p test
 ```
 
 It will println user realname and roles
+
+### 4. Http restful test
+
+```
+curl -X POST -k http://localhost:8081/v1/auth -d '{"Login":"xxx","Password":"xxx"}'
+```

@@ -10,7 +10,6 @@ import (
 
 	"github.com/lajunta/myauthd/grpcd"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 var (
@@ -25,7 +24,7 @@ var (
 func init() {
 	flagParse()
 	address = host + ":" + port
-	setCertPath()
+	//setCertPath()
 }
 
 func flagParse() {
@@ -47,13 +46,13 @@ func setCertPath() {
 
 func main() {
 
-	creds, err := credentials.NewClientTLSFromFile(certFilePath, "")
-	if err != nil {
-		log.Fatalf("could not load tls cert: %s", err)
-	}
+	// creds, err := credentials.NewClientTLSFromFile(certFilePath, "")
+	// if err != nil {
+	// 	log.Fatalf("could not load tls cert: %s", err)
+	// }
 
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(creds))
-	//conn, err := grpc.Dial(address, grpc.WithInsecure())
+	// conn, err := grpc.Dial(address, grpc.WithTransportCredentials(creds))
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	} else {

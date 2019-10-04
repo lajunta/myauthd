@@ -7,3 +7,4 @@ myauthd_linux
 myauthd.deb
 cert/*
 grpcd/grpcd.pb.go
+grpcd/grpcd.pb.gw.go
