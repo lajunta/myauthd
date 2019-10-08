@@ -1,3 +1,5 @@
+create user if not exists test;
+grant select on netschool.user to 'test'@'%' identified by 'test';
 create database if not exists netschool;
 use netschool;
 create table if not exists user(

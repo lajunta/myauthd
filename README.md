@@ -33,16 +33,17 @@ go get -u github.com/golang/protobuf/protoc-gen-go
 ~/.myauthd/config.toml
 
 ```toml
-DbAddress =  "127.0.0.1:3306"
-DbName  = "netschool" 
-TableName  = "user" 
-DbUser  = "test"
-DbPass  = "test"
-LoginFieldName = "login"
-PassFieldName  = "password"
-RealNameFieldName = "realname"
-RolesFieldName  = "roles"
-CryptMethod = "sha256"
+  DbAddress =  "127.0.0.1:3306"
+  DbName  = "netschool" 
+  TableName  = "user" 
+  DbUser  = "test"
+  DbPass  = "test"
+  LoginFieldName = "login"
+  PassFieldName  = "hashed_password"
+  RealNameFieldName = "realname"
+  RolesFieldName  = "roles"
+  CryptMethod = "" 
+  ToUTF8 = false
 ```
 
 ### 2. Modify systemd file and Start it

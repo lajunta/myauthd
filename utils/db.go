@@ -2,6 +2,7 @@ package utils
 
 import (
 	"database/sql"
+	"fmt"
 	"time"
 
 	// must init mysql
@@ -26,6 +27,7 @@ type Config struct {
 	RealNameFieldName string
 	RolesFieldName    string
 	CryptMethod       string
+	ToUTF8            bool
 }
 
 var (
@@ -67,6 +69,21 @@ func readConfig() {
 	configFilePath := path.Join(home, ".myauthd", configFileName)
 	_, err = toml.DecodeFile(configFilePath, &CFG)
 	if err != nil {
+		conf := `
+		~/.myauthd/config.toml
+		DbAddress =  "127.0.0.1:3306"
+		DbName  = "netschool" 
+		TableName  = "user" 
+		DbUser  = "test"
+		DbPass  = "test"
+		LoginFieldName = "login"
+		PassFieldName  = "hashed_password"
+		RealNameFieldName = "realname"
+		RolesFieldName  = "roles"
+		CryptMethod = "" 
+		ToUTF8 = false
+		`
+		fmt.Println(conf)
 		log.Fatalln("Can't Open ConfigFile of ConfigFile Wrong!!")
 		os.Exit(1)
 	}

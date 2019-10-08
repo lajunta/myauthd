@@ -1,11 +1,14 @@
 package utils
 
 import (
+	"bytes"
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
 	"hash"
 	"strings"
+
+	"golang.org/x/text/encoding/charmap"
 )
 
 var (
@@ -38,4 +41,13 @@ func Filter(str string) string {
 		str = strings.ReplaceAll(str, v, "")
 	}
 	return str
+}
+
+// Latin1ToUtf8 convert latin1 string to utf8
+func Latin1ToUtf8(s string) string {
+	b := []byte{}
+	buf := bytes.NewBufferString(s)
+	r := charmap.ISO8859_1.NewDecoder().Reader(buf)
+	r.Read(b)
+	return string(b)
 }

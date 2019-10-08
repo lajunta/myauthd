@@ -30,3 +30,13 @@ grant select on db.table to 'test';
 ```
 UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
 ```
+
+## show grants
+```
+show grants
+```
+
+## revoke grants
+```
+revoke all on db.table from 'test'@'%'
+```

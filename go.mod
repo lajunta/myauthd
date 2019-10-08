@@ -9,7 +9,8 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/grpc-ecosystem/grpc-gateway v1.11.3
 	golang.org/x/net v0.0.0-20190311183353-d8887717615a
-	google.golang.org/genproto v0.0.0-20191002211648-c459b9ce5143
+	golang.org/x/text v0.3.0
+	google.golang.org/genproto v0.0.0-20191007204434-a023cd5227bd
 	google.golang.org/grpc v1.24.0
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )

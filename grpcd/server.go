@@ -45,19 +45,27 @@ func (s *Server) Auth(ctx context.Context, in *AuthRequest) (*AuthReply, error) 
 	if len(login) == 0 {
 		return &u, nil
 	}
+	var realName string
+	var tags string
 	passd := utils.Filter(in.Password)
 	passd = utils.Crypt(passd)
 	qstr := fmt.Sprintf("select %s,%s from %s where %s='%s' and %s=password('%s')", c.RealNameFieldName, c.RolesFieldName, c.TableName, c.LoginFieldName, login, c.PassFieldName, passd)
 	row := utils.DB.QueryRow(qstr)
 	//row := utils.DB.QueryRow("select ?,? from ? where ?='?' and ?=password(?)", c.RealNameFieldName, c.RolesFieldName, c.TableName, c.LoginFieldName, login, c.PassFieldName, passd)
-	err := row.Scan(&u.RealName, &u.Tags)
+	err := row.Scan(&realName, &tags)
 
 	if err != nil {
-		// log.Println(err.Error())
 		return &u, errors.New("Auth Failed")
 	}
 	u.Logined = true
 	u.Login = login
+	if utils.CFG.ToUTF8 {
+		u.RealName = utils.Latin1ToUtf8(realName)
+		u.Tags = utils.Latin1ToUtf8(tags)
+	} else {
+		u.RealName = realName
+		u.Tags = tags
+	}
 	return &u, nil
 }
 
